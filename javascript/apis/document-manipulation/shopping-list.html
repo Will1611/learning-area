@@ -1,12 +1,13 @@
 <!DOCTYPE html>
 <html lang="en-US">
   <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Shopping list example</title>
     <style>
       li {
         margin-bottom: 10px;
+        list-style: none;
       }
 
       li button {
@@ -17,21 +18,43 @@
     </style>
   </head>
   <body>
-
     <h1>My shopping list</h1>
 
     <div>
       <label for="item">Enter a new item:</label>
-      <input type="text" name="item" id="item">
+      <input type="text" name="item" id="item" />
       <button>Add item</button>
     </div>
 
-    <ul>
-
-    </ul>
+    <ul></ul>
 
     <script>
+      const list = document.querySelector("ul");
+      const listInput = document.querySelector("input");
+      const listBtn = document.querySelector("button");
 
+      const addItem = listBtn.addEventListener("click", () => {
+        let itemText = listInput.value;
+        listInput.value = "";
+        listInput.focus();
+
+        const itemLi = document.createElement("li");
+        const itemSpan = document.createElement("span");
+        const itemBtn = document.createElement("button");
+
+        itemLi.appendChild(itemSpan);
+        itemLi.appendChild(itemBtn);
+
+        itemSpan.textContent = itemText;
+        itemBtn.textContent = "Delete";
+
+        list.appendChild(itemLi);
+
+        itemBtn.addEventListener("click", () => {
+          itemLi.remove();
+          listInput.focus();
+        });
+      });
     </script>
   </body>
 </html>
